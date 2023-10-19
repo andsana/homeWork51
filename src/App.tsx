@@ -1,16 +1,39 @@
-import './App.css';
 import Ball from './Ball';
+import './App.css';
+import {useState} from 'react';
 
-const App = () => {
+const generateNumbers = () => {
+  const newNumbers: number[] = [];
+  while (newNumbers.length < 5) {
+    const randomNumber = Math.floor(Math.random() * 32) + 5;
+
+    if (!newNumbers.includes(randomNumber)) {
+      newNumbers.push(randomNumber);
+    }
+  }
+  newNumbers.sort((a, b) => a - b);
+  return newNumbers;
+};
+
+function App() {
+  const initialNumbers = [5, 11, 16, 23, 32];
+  const [numbers, setNumbers] = useState(initialNumbers);
+
+  const handleNewNumbers = () => {
+    const newNumbers = generateNumbers();
+    setNumbers(newNumbers);
+  };
+
   return (
-    <div className="balls">
-      <Ball number={5} />
-      <Ball number={11} />
-      <Ball number={16} />
-      <Ball number={23} />
-      <Ball number={32} />
+    <div>
+      <div className="balls">
+        {numbers.map((el) => (
+          <Ball number={el} key={el}/>
+        ))}
+      </div>
+      <button className="button" onClick={handleNewNumbers}>New numbers</button>
     </div>
   );
-};
+}
 
 export default App;

@@ -4,9 +4,11 @@
   padding: 2rem;
   text-align: center;
 }
+
 .balls {
   display: flex;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
 .ball {
